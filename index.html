@@ -2,326 +2,341 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FrovenMC - Devil's Playground</title>
-  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FrovenMC | Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Black Ops One', sans-serif;
-      background: #0a0a0a;
-      color: #f0f0f0;
-      overflow-x: hidden;
-      position: relative;
-    }
-    .flame-bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: url('https://media.tenor.com/5XHZzPXxHw0AAAAC/fire-burning.gif') center/cover no-repeat;
-      opacity: 0.08;
-      z-index: -1;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #c8f7ff;
     }
     header {
+      background: #01141f;
+      padding: 1em;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 50px;
-      background: rgba(0, 0, 0, 0.9);
-      box-shadow: 0 0 15px crimson;
     }
-    h1 {
-      color: #f00;
-      font-size: 2.5rem;
-    }
-    h1 span.red {
-      color: crimson;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-      padding: 0;
+    header h1 {
+      color: #00ffff;
       margin: 0;
+      font-size: 2em;
     }
-    nav ul li a {
-      text-decoration: none;
-      color: #ff4444;
-      font-size: 1.1rem;
-      transition: 0.3s;
-    }
-    nav ul li a:hover {
-      color: #ff0000;
-      text-shadow: 0 0 5px red;
-    }
-    .hero {
-      text-align: center;
-      margin-top: 100px;
-    }
-    .hero h2 {
-      font-size: 3rem;
-      color: #ff0000;
-      text-shadow: 0 0 10px red;
-    }
-    .hero .ip {
-      font-size: 1.5rem;
-      margin: 10px 0;
+    nav a {
       color: #fff;
-    }
-    .btn.devil-btn,
-    button.devil-btn {
-      padding: 15px 30px;
-      background: linear-gradient(135deg, #111 0%, #222 100%);
-      color: crimson;
-      border: 3px solid crimson;
-      border-radius: 15px;
-      font-size: 1.2rem;
-      cursor: pointer;
+      margin: 0 1em;
       text-decoration: none;
-      box-shadow: 0 0 10px crimson, 0 0 25px black inset;
-      transition: 0.3s;
-      display: inline-block;
-      margin-top: 15px;
     }
-    .btn.devil-btn:hover,
-    button.devil-btn:hover {
-      background: crimson;
-      color: #000;
-      box-shadow: 0 0 25px red, 0 0 10px crimson inset;
-      transform: scale(1.05);
+    #topbar {
+      background: #001f29;
+      padding: 0.5em 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9em;
+      border-bottom: 1px solid #00ffff33;
     }
-    .store {
-      text-align: center;
-      margin: 60px auto;
-      max-width: 900px;
+    #topbarUser {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
     }
-    label {
-      color: crimson;
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
+    #topbarUser img {
+      border-radius: 4px;
+      vertical-align: middle;
     }
-    input[type='text'] {
-      padding: 10px;
-      border-radius: 8px;
-      border: 2px solid crimson;
-      width: 300px;
-      margin-bottom: 20px;
-      font-size: 1rem;
-      background: #111;
-      color: #f0f0f0;
+    main {
+      padding: 2em;
+      max-width: 1200px;
+      margin: auto;
     }
-    .items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+    h2, h3 {
+      border-left: 5px solid #00ffff;
+      padding-left: 10px;
+      color: #00ffff;
+    }
+    .store-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5em;
+      margin-top: 2em;
     }
     .item {
-      background: #1a1a1a;
-      border: 2px solid crimson;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px red;
-    }
-    footer {
+      background: #01141f;
+      border: 1px solid #00ffff55;
+      border-radius: 16px;
+      padding: 1em;
+      flex: 1 0 calc(25% - 1em);
+      min-width: 200px;
       text-align: center;
-      padding: 20px;
-      background: #111;
-      margin-top: 100px;
-      color: #aaa;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #00ffff33;
     }
-
-    /* Modal Styles */
-    #thankYouModal {
-      display: none; /* hidden by default */
-      position: fixed;
-      z-index: 9999;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.85);
-      font-family: 'Black Ops One', sans-serif;
+    .item:hover {
+      transform: scale(1.05);
+      background: #003744;
+      box-shadow: 0 0 12px #00ffff;
     }
-    #thankYouModal .modal-content {
-      background: #220000;
-      margin: 15% auto;
-      padding: 30px;
-      border: 4px solid crimson;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 20px;
-      text-align: center;
-      color: crimson;
-      box-shadow: 0 0 20px crimson;
-      animation: popIn 0.5s ease forwards;
-    }
-    #thankYouModal .close-btn {
-      background: crimson;
-      color: #000;
-      font-weight: bold;
+    .item button {
+      margin-top: 1em;
+      background: #00ffff;
       border: none;
-      padding: 10px 25px;
-      margin-top: 20px;
-      font-size: 1.1rem;
+      padding: 0.5em 1em;
+      color: #000;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .item button:hover {
+      box-shadow: 0 0 8px #00ffff;
+      background: #00e6e6;
+    }
+    .popup {
+      display: none;
+      background: #00e5ff;
+      color: black;
+      padding: 1em;
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
       border-radius: 10px;
-      box-shadow: 0 0 10px red;
-      transition: background 0.3s;
+      z-index: 999;
+      text-align: center;
     }
-    #thankYouModal .close-btn:hover {
-      background: #ff5555;
+    #loginForm {
+      max-width: 400px;
+      margin: 2em auto;
+      padding: 2em;
+      background: #001f29;
+      border: 1px solid #00ffff44;
+      border-radius: 10px;
+      text-align: center;
     }
-    @keyframes popIn {
-      0% {transform: scale(0.7); opacity: 0;}
-      100% {transform: scale(1); opacity: 1;}
+    #loginForm input {
+      padding: 0.5em;
+      margin-bottom: 1em;
+      width: 80%;
+      border: none;
+      border-radius: 5px;
+    }
+    .cart-container {
+      margin-top: 2em;
+      background: #001f29;
+      padding: 1em;
+      border-radius: 10px;
+    }
+    .cart-container h3 {
+      margin-top: 0;
+    }
+    .recharge-btns button {
+      background: #00bfff;
+      margin: 0.2em;
     }
   </style>
 </head>
 <body>
-  <div class="flame-bg"></div>
   <header>
-    <h1><span class="red">Froven</span>MC</h1>
+    <h1>☠️ FrovenMC</h1>
     <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#store">Store</a></li>
-        <li><a href="https://discord.gg/ERGujJznVk" target="_blank">Discord</a></li>
-      </ul>
+      <a href="#">Home</a>
+      <a href="#">Store</a>
+      <a href="#">Profile</a>
+      <a href="#">Discord</a>
     </nav>
   </header>
-
-  <section class="hero">
-    <h2>🔥 Enter the Devil's Playground 🔥</h2>
-    <p class="ip">
-      IP: <strong>frovenmc.strangled.net</strong> Port: <strong>22242</strong>
-    </p>
-    <a class="btn devil-btn" href="#store">☠️ Enter the Store ☠️</a>
-  </section>
-
-  <main class="store" id="store">
-    <h2>Buy Your Power</h2>
-    <label for="username">Enter your Minecraft Username:</label>
-    <input
-      type="text"
-      id="username"
-      placeholder="Your Minecraft Username"
-      autocomplete="off"
-      required
-    />
-    <div class="items">
-      <div class="item">
-        <h3>☠️ Warrior</h3>
-        <p>₹99 - Basic rank with custom tag and /kit warrior</p>
-        <button class="devil-btn" onclick="addToCart('Warrior', 99)">
-          Add to Cart
-        </button>
-      </div>
-      <div class="item">
-        <h3>🔥 DevilGod</h3>
-        <p>₹199 - Advanced rank with flight and /kit devilgod</p>
-        <button class="devil-btn" onclick="addToCart('DevilGod', 199)">
-          Add to Cart
-        </button>
-      </div>
-      <div class="item">
-        <h3>💀 ShadowBeast</h3>
-        <p>₹299 - Ultimate rank with disguise powers and /kit shadow</p>
-        <button class="devil-btn" onclick="addToCart('ShadowBeast', 299)">
-          Add to Cart
-        </button>
-      </div>
-    </div>
-    <br />
-    <button type="button" class="devil-btn" onclick="checkout()">
-      🛒 Checkout
-    </button>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 <span class="red">FrovenMC</span>. All Rights Reserved.</p>
-  </footer>
-
-  <!-- Modal -->
-  <div id="thankYouModal">
-    <div class="modal-content">
-      <h2>Thank You for Your Purchase!</h2>
-      <p>Your request has been sent to the server owner.</p>
-      <button class="close-btn" onclick="closeModal()">Close</button>
-    </div>
+  <div id="topbar">
+    <div>🪙 Coins: <span id="coinBalance">1000</span></div>
+    <div id="topbarUser">👤 Not Logged In</div>
   </div>
 
+  <div id="loginForm">
+    <h2>🔐 Player Login</h2>
+    <input type="text" id="usernameInput" placeholder="Enter Minecraft Username">
+    <br>
+    <button onclick="login()">Login</button>
+  </div>
+
+  <main id="mainContent" style="display:none;">
+    <h2>🛍️ FrovenMC Store</h2>
+    <div class="store-grid" id="storeItems"></div>
+
+    <div class="cart-container">
+      <h3>🛒 Cart</h3>
+      <ul id="cartList"></ul>
+      <p>Total: <span id="cartTotal">0</span> 🪙</p>
+      <button onclick="checkoutCart()">Checkout</button>
+    </div>
+
+    <div class="cart-container">
+      <h3>💳 Recharge Coins</h3>
+      <div class="recharge-btns">
+        <button onclick="rechargeCoins(100)">₹10 for 100</button>
+        <button onclick="rechargeCoins(250)">₹20 for 250</button>
+        <button onclick="rechargeCoins(500)">₹50 for 500</button>
+      </div>
+    </div>
+
+    <div class="popup" id="popup">Thank you! Coins deducted.</div>
+  </main>
+
   <script>
+    let coins = parseInt(localStorage.getItem("coins")) || 1000;
+    let playerName = localStorage.getItem("playerName") || null;
     let cart = [];
-    try {
-      cart = JSON.parse(localStorage.getItem('cart')) || [];
-    } catch (e) {
-      console.warn('localStorage unavailable, cart will not persist across reloads.');
+
+    const storeItems = [
+      { name: "Frost Rank", cost: 500 },
+      { name: "Titan Rank", cost: 400 },
+      { name: "Knight Rank", cost: 300 },
+      { name: "Hero Rank", cost: 200 },
+      { name: "Warrior Rank", cost: 100 },
+      { name: "1000 Coins", cost: 800 },
+      { name: "500 Coins", cost: 450 },
+      { name: "250 Coins", cost: 250 },
+      { name: "100 Coins", cost: 100 },
+      { name: "50 Coins", cost: 50 },
+      { name: "Frost Key", cost: 600 },
+      { name: "Diamond Key", cost: 400 },
+      { name: "Iron Key", cost: 250 },
+      { name: "Epic Key", cost: 150 },
+      { name: "Common Key", cost: 100 }
+    ];
+
+    function login() {
+      const input = document.getElementById("usernameInput");
+      if (!validateUsername(input.value)) return alert("Please enter your Minecraft username.");
+      setPlayerName(input.value.trim());
+      toggleLoginUI();
     }
 
-    function addToCart(item, price) {
-      cart.push({ item, price });
-      try {
-        localStorage.setItem('cart', JSON.stringify(cart));
-      } catch (e) {}
-      alert(`${item} added to cart!`);
+    function validateUsername(name) {
+      return name.trim().length > 0;
     }
 
-    async function checkout() {
-      const usernameInput = document.getElementById('username').value.trim();
-      if (!usernameInput)
-        return alert(
-          'Please enter your Minecraft username before checkout.'
-        );
+    function setPlayerName(name) {
+      playerName = name;
+      localStorage.setItem("playerName", playerName);
+    }
 
-      if (cart.length === 0) return alert('Your cart is empty!');
+    function toggleLoginUI() {
+      document.getElementById("loginForm").style.display = 'none';
+      document.getElementById("mainContent").style.display = 'block';
+      updateTopbar();
+      updateCoinUI();
+      renderStore();
+      renderCart();
+    }
 
-      let summary = `**🧾 FrovenMC Purchase Summary for ${usernameInput}:**\n`;
-      let total = 0;
-      cart.forEach(({ item, price }) => {
-        summary += `• ${item} — ₹${price}\n`;
-        total += price;
+    function updateCoinUI() {
+      document.getElementById("coinBalance").textContent = coins;
+      localStorage.setItem("coins", coins);
+    }
+
+    function showPopup(message) {
+      const popup = document.getElementById("popup");
+      popup.textContent = message;
+      popup.style.display = 'block';
+      setTimeout(() => popup.style.display = 'none', 2500);
+    }
+
+    function renderStore() {
+      const store = document.getElementById("storeItems");
+      store.innerHTML = "";
+      storeItems.forEach((item, i) => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<h3>${item.name}</h3><p>Cost: ${item.cost} 🪙</p><button onclick='addToCart(${i})'>Add to Cart</button>`;
+        store.appendChild(div);
       });
-      summary += `**Total: ₹${total}**`;
+    }
 
-      const sent = await sendDiscordMessage(summary);
-      if (sent) {
-        openModal();
-        try {
-          localStorage.removeItem('cart');
-        } catch (e) {}
+    function addToCart(index) {
+      cart.push(storeItems[index]);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartList = document.getElementById("cartList");
+      cartList.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        total += item.cost;
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - ${item.cost} 🪙`;
+        cartList.appendChild(li);
+      });
+      document.getElementById("cartTotal").textContent = total;
+    }
+
+    function checkoutCart() {
+      let total = cart.reduce((sum, item) => sum + item.cost, 0);
+      if (coins >= total) {
+        coins -= total;
+        updateCoinUI();
+
+        const purchasedItems = cart.map(item => item.name).join(", ");
         cart = [];
+        renderCart();
+
+        showPopup("🙏 Thank you for buying items. Your request has been sent to the owner.");
+
+        const webhookUrl = "https://discord.com/api/webhooks/1387740742700761130/GlX8BGTIGXeYYYfhhsgyi4X6JmkDF7G-X82B5JE-7kWk0O4RcBZrIeyys-gA4HIj-3mz";
+        const data = {
+          embeds: [{
+            title: "🛒 New Store Purchase on FrovenMC!",
+            color: 16711680,
+            fields: [
+              { name: "👤 Player", value: playerName || "Unknown", inline: true },
+              { name: "🎁 Items", value: purchasedItems || "None", inline: true },
+              { name: "💰 Total Coins", value: total.toString(), inline: true }
+            ],
+            footer: { text: "FrovenMC Store" },
+            timestamp: new Date().toISOString()
+          }]
+        };
+
+        fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        }).catch(err => console.error("Webhook Error:", err));
+
       } else {
-        alert('⚠️ Failed to send purchase to Discord. Try again later.');
+        showPopup("❌ Not enough coins for checkout!");
       }
     }
 
-    // Discord webhook URL for purchases
-    const PURCHASE_WEBHOOK_URL =
-      'https://discord.com/api/webhooks/1381484768750997554/CjluT3nh8Nw6KFIx8gZH52Jw_G9BoUSxPjGDICNcAuI28N2-KmRsmZ10vovc6p5wF4qJ';
-
-    async function sendDiscordMessage(message) {
-      try {
-        const res = await fetch(PURCHASE_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: message }),
-        });
-
-        if (!res.ok)
-          throw new Error(`Webhook failed with status ${res.status}`);
-        return true;
-      } catch (err) {
-        console.error('❌ Failed to send Discord webhook:', err);
-        return false;
-      }
+    function rechargeCoins(amount) {
+      coins += amount;
+      updateCoinUI();
+      showPopup(`💰 Recharged ${amount} coins!`);
     }
 
-    function openModal() {
-      document.getElementById('thankYouModal').style.display = 'block';
+    function logout() {
+      localStorage.removeItem("playerName");
+      location.reload();
     }
 
-    function closeModal() {
-      document.getElementById('thankYouModal').style.display = 'none';
+    function updateTopbar() {
+      const topbar = document.getElementById("topbarUser");
+      topbar.innerHTML = `
+        <img src="https://minotar.net/avatar/${playerName}/32" alt="avatar">
+        ${playerName} | <a href="#" onclick="logout()">Logout</a>
+      `;
+    }
+
+    if (playerName) {
+      document.getElementById("loginForm").style.display = 'none';
+      document.getElementById("mainContent").style.display = 'block';
+      updateTopbar();
+      updateCoinUI();
+      renderStore();
+      renderCart();
     }
   </script>
 </body>
