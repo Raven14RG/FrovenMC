@@ -12,7 +12,31 @@
       font-family: 'Orbitron', sans-serif;
       background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
       color: #c8f7ff;
+      position: relative;
     }
+
+    /* 🔥 Aqua Flame Background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #00ffff33 0%, transparent 70%),
+                  radial-gradient(circle at 20% 30%, #00ffff22 0%, transparent 80%),
+                  radial-gradient(circle at 80% 70%, #00ffff22 0%, transparent 80%);
+      animation: flameMove 6s infinite ease-in-out;
+      z-index: -1;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    @keyframes flameMove {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
+    }
+
     header {
       background: #01141f;
       padding: 1em;
@@ -29,7 +53,12 @@
       color: #fff;
       margin: 0 1em;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
+    nav a:hover {
+      color: #00ffff;
+    }
+
     #topbar {
       background: #001f29;
       padding: 0.5em 1em;
@@ -95,6 +124,7 @@
       box-shadow: 0 0 8px #00ffff;
       background: #00e6e6;
     }
+
     .popup {
       display: none;
       background: #00e5ff;
@@ -108,6 +138,7 @@
       z-index: 999;
       text-align: center;
     }
+
     #loginForm {
       max-width: 400px;
       margin: 2em auto;
@@ -117,6 +148,7 @@
       border-radius: 10px;
       text-align: center;
     }
+
     #loginForm input {
       padding: 0.5em;
       margin-bottom: 1em;
@@ -124,6 +156,7 @@
       border: none;
       border-radius: 5px;
     }
+
     .cart-container {
       margin-top: 2em;
       background: #001f29;
@@ -137,6 +170,47 @@
       background: #00bfff;
       margin: 0.2em;
     }
+
+    /* Founders Section */
+    .founder-card {
+      background: #01141f;
+      padding: 1.5em;
+      border-radius: 16px;
+      width: 260px;
+      text-align: center;
+      box-shadow: 0 0 12px #00ffff66;
+      transition: all 0.4s ease;
+    }
+    .founder-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff44;
+    }
+    .founder-card img {
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00ffff;
+      transition: 0.3s;
+    }
+    .founder-card h3 {
+      color: #00ffff;
+      margin-top: 1em;
+      font-size: 1.5em;
+    }
+    .founder-card .role {
+      color: #c8f7ff;
+      margin: 0.3em 0;
+    }
+    .founder-card .real {
+      color: #89e0ff;
+      font-size: 0.9em;
+      margin-bottom: 0.5em;
+    }
+    .founder-card .quote {
+      font-style: italic;
+      color: #00e6ff;
+      font-size: 0.9em;
+      margin-top: 0.5em;
+      padding: 0 0.5em;
+    }
   </style>
 </head>
 <body>
@@ -146,9 +220,10 @@
       <a href="#">Home</a>
       <a href="#">Store</a>
       <a href="#">Profile</a>
-      <a href="#">Discord</a>
+      <a href="https://discord.gg/RPCQEZHVjM" target="_blank">Discord</a>
     </nav>
   </header>
+
   <div id="topbar">
     <div>🪙 Coins: <span id="coinBalance">1000</span></div>
     <div id="topbarUser">👤 Not Logged In</div>
@@ -182,6 +257,26 @@
     </div>
 
     <div class="popup" id="popup">Thank you! Coins deducted.</div>
+
+    <section style="padding: 4em 1em; background: #00131f; border-top: 2px solid #00ffff55;">
+      <h2 style="text-align: center; font-size: 2.5em; color: #00ffff; margin-bottom: 1em;">💼 Meet the Founders</h2>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2em; max-width: 1200px; margin: auto;">
+        <div class="founder-card">
+          <img src="https://minotar.net/avatar/NotSenseiWeb/100" />
+          <h3>NotSenseiWeb</h3>
+          <p class="role">Main Founder</p>
+          <p class="real">Rudransh Pandey</p>
+          <p class="quote">"Build it brutal. Rule it with legacy."</p>
+        </div>
+        <div class="founder-card">
+          <img src="https://minotar.net/avatar/Imortal_Stone/100" />
+          <h3>Imortal_Stone</h3>
+          <p class="role">Co-Founder</p>
+          <p class="real">S Akshit</p>
+          <p class="quote">"Stone never breaks. Neither do we."</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -278,13 +373,10 @@
       if (coins >= total) {
         coins -= total;
         updateCoinUI();
-
         const purchasedItems = cart.map(item => item.name).join(", ");
         cart = [];
         renderCart();
-
         showPopup("🙏 Thank you for buying items. Your request has been sent to the owner.");
-
         const webhookUrl = "https://discord.com/api/webhooks/1387740742700761130/GlX8BGTIGXeYYYfhhsgyi4X6JmkDF7G-X82B5JE-7kWk0O4RcBZrIeyys-gA4HIj-3mz";
         const data = {
           embeds: [{
@@ -299,13 +391,11 @@
             timestamp: new Date().toISOString()
           }]
         };
-
         fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         }).catch(err => console.error("Webhook Error:", err));
-
       } else {
         showPopup("❌ Not enough coins for checkout!");
       }
